@@ -1,0 +1,7 @@
+FROM alpine:latest
+RUN apk update && apk add python3 py3-pip openssh-server vim bash sudo nano uptimed libuser shadow
+COPY id_rsa.pub  /root/.ssh/authorized_keys
+COPY node.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/sbin/sshd", "-D"]
+

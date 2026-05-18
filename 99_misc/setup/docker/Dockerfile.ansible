@@ -1,0 +1,9 @@
+FROM debian:12
+RUN apt-get update && apt-get install -y openssh-server git sudo iputils-ping ansible less openssh-client vim nano sshpass uptimed
+RUN echo 'ansible	ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers &&   echo "PS1='\[\033[01;31m\]\u@\h \[\033[00m\]\w\[\033[01;34m\]\[\033[00m\]$ \n'" >>  /etc/bash.bashrc
+RUN useradd -m ansible && mkdir -p /home/ansible/.ssh && chown ansible:ansible -R /home/ansible/.ssh &&  echo "PS1='\[\033[01;32m\]\u@\h \[\033[00m\]\w\[\033[01;34m\]\[\033[00m\]$ \n'" >>  /home/ansible/.bashrc
+COPY id_rsa /home/ansible/.ssh/id_rsa
+RUN chown ansible:ansible -R /home/ansible/.ssh
+RUN chmod 400 /home/ansible/.ssh/id_rsa
+USER ansible
+WORKDIR /home/ansible

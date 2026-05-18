@@ -1,0 +1,17 @@
+---
+
+-
+  hosts: all
+  become: True
+  tasks:
+    - name: Install packages on Debian
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: True
+      loop: 
+        - vim-nox
+        - arp-scan
+        - wget
+         
+      when: ansible_os_family == 'Debian'

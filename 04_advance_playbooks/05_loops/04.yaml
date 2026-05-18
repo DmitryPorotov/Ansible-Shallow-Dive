@@ -1,0 +1,25 @@
+---
+- 
+  hosts: all
+  vars:
+    users:
+    - lastname: Schapelle
+      members:
+        - Alex
+        - Shir
+    - lastname: Golan
+      members:
+        - Yoni
+  become: True
+
+  tasks:
+    - name: "{{ item.1 }}"
+      user:
+        name: "{{ item.1 }}"
+        state: present
+        comment: "{{ item.1 | title }} {{ item.0.lastname }}"
+      loop:
+         "{{ users |subelements('members') }}"
+
+
+

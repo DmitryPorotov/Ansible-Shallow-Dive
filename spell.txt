@@ -1,0 +1,5 @@
+doas
+nologin
+chgrp
+Schapelle
+usepam

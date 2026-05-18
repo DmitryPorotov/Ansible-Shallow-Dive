@@ -1,0 +1,24 @@
+---
+
+- 
+  hosts: node1
+  become: true
+  roles:
+    - roles/common
+  tasks:
+    - name: configure environemt
+      shell: |
+        virtualenv .
+        python3 -m flask 
+        echo $?
+    
+    - name: clone project from gitlab
+      git:
+        repo: https://github.com/zero-pytagoras/details-app.git
+        dest: /home/docker/details_app
+
+    - name: run the application
+      shell: |
+        gunicorn --config gunicorn_conf.py src.details:app &
+
+

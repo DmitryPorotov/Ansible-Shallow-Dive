@@ -1,0 +1,10 @@
+FROM debian:12
+EXPOSE 22
+EXPOSE 80
+EXPOSE 8080
+RUN apt-get -y update && apt-get -y install openssh-server passwd sudo python3 vim nano python3-apt uptimed\
+    && rm -rf /var/lib/apt/lists/* && chmod 600 /root/.ssh/ 
+COPY id_rsa.pub  /root/.ssh/authorized_keys
+COPY node.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/sbin/sshd", "-D"]

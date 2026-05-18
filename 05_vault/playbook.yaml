@@ -1,0 +1,13 @@
+---
+
+- 
+  hosts: all
+  become: yes
+  become_user: root
+  gather_facts: no
+  tasks:
+    - name: 'Copying for purposes of example'
+      copy:
+        src: /etc/os-release
+        dest: /root/release
+

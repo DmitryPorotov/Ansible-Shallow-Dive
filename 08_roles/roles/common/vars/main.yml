@@ -1,0 +1,13 @@
+---
+# vars file for common
+packages: 
+  - python3
+  - virtualenv
+  - python3-poetry
+  - python3-flask
+  - python3-gunicorn
+  - python3-pip
+  - python3-apt
+  - git
+  - vim
+
